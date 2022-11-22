@@ -1,13 +1,13 @@
-import "./styles/App.css";
+import { useState } from "react";
+import Header from "./components/layout/Header";
 
-function App() {
+const App = () => {
+  const [darkToggle, setDarkToggle] = useState(false);
   return (
-    <div className="App">
-      <header>
-        <p>Hello, Automaton!</p>
-      </header>
+    <div className={`${darkToggle && "dark"} bg-white dark:bg-slate-800`}>
+      <Header darkToggle={darkToggle} setDarkToggle={setDarkToggle} />
     </div>
   );
-}
+};
 
 export default App;
