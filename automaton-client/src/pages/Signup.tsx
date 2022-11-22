@@ -4,7 +4,6 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <p>Signup</p>
     </div>
   );
 };
