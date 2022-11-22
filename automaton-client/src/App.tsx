@@ -1,11 +1,9 @@
-import { useState } from "react";
-import Header from "./components/layout/Header";
+import Home from "./pages/Home";
 
 const App = () => {
-  const [darkToggle, setDarkToggle] = useState(false);
   return (
-    <div className={`${darkToggle && "dark"} bg-white dark:bg-slate-800`}>
-      <Header darkToggle={darkToggle} setDarkToggle={setDarkToggle} />
+    <div className="bg-gray-700 w-screen h-screen">
+      <Home />
     </div>
   );
 };
