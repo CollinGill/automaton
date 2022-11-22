@@ -2,7 +2,7 @@ import Navbar from "../components/layout/Navbar";
 
 const Signup = () => {
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
     </div>
   );
