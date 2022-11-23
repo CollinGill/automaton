@@ -21,40 +21,48 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
-    const loginPayload: LogObj = {
-      uname: username,
-      passwd: password,
-    };
+    if (username === "" || password === "") {
+      console.error("Login error");
+    } else {
+      const loginPayload: LogObj = {
+        uname: username,
+        passwd: password,
+      };
 
-    setUsername("");
-    setPassword("");
+      setUsername("");
+      setPassword("");
 
-    // TODO: set loginpayload to backend when setup and update return value, redirect to account if success
-    console.log(loginPayload);
+      // TODO: set loginpayload to backend when setup and update return value, redirect to account if success
+      console.log(loginPayload);
+    }
   };
 
   return (
     <div className="flex flex-col">
       <Navbar />
       <div className="py-3" />
-      <div className="flex flex-col m-auto md:w-80 md:h-96 bg-gray-800 rounded-2xl border-solid border-4 border-gray-900">
+      <div className="flex flex-col m-auto md:w-80 md:h-96 bg-gray-800 rounded-2xl border-solid border-4 border-gray-900 shadow-md">
         <form>
           <div className="flex flex-col px-2">
-            <label className="py-4 text-gray-400">Username</label>
+            <label className="block py-4 text-gray-400 font-bold">
+              Username
+            </label>
             <input
               value={username}
               type={"text"}
               onChange={handleUNameChange}
-              className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
+              className="shadow appearance-none w-full py-1 px-3 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
             />
           </div>
           <div className="flex flex-col px-2">
-            <label className="py-4 text-gray-400">Password</label>
+            <label className="block py-4 text-gray-400 font-bold">
+              Password
+            </label>
             <input
               value={password}
               type={"text"}
               onChange={handlePasswordChange}
-              className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
+              className="shadow appearance-none w-full py-1 px-3 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
             />
           </div>
         </form>
