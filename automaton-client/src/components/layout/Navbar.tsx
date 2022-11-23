@@ -3,22 +3,13 @@ const Navbar = () => {
     <div className="px-3 bg-gray-900 w-screen h-auto">
       <nav className="flex">
         {/* TODO: set up links to other pages */}
-        <a
-          href={"/"}
-          className="text-gray-400 px-2 py-1 decoration-indigo-500 underline-offset-4 hover:underline"
-        >
+        <a href={"/"} className="navbar-link">
           Automaton
         </a>
-        <a
-          href={"/login"}
-          className="text-gray-400 px-2 py-1 decoration-indigo-500 underline-offset-4 hover:underline"
-        >
+        <a href={"/login"} className="navbar-link">
           Login
         </a>
-        <a
-          href={"/signup"}
-          className="text-gray-400 px-2 py-1 decoration-indigo-500 underline-offset-4 hover:underline"
-        >
+        <a href={"/signup"} className="navbar-link">
           Signup
         </a>
       </nav>
