@@ -1,6 +1,38 @@
+import React, { useState } from "react";
+
 import Navbar from "../components/layout/Navbar";
 
+interface LogObj {
+  uname: string;
+  passwd: string;
+}
+
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  const handleUNameChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setUsername(event.currentTarget.value);
+  };
+
+  const handlePasswordChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const handleSubmit = () => {
+    const loginPayload: LogObj = {
+      uname: username,
+      passwd: password,
+    };
+
+    setUsername("");
+    setPassword("");
+
+    // TODO: set loginpayload to backend when setup and update return value, redirect to account if success
+    console.log(loginPayload);
+  };
+
   return (
     <div className="flex flex-col">
       <Navbar />
@@ -9,15 +41,28 @@ const Login = () => {
         <form>
           <div className="flex flex-col px-2">
             <label className="py-4 text-gray-400">Username</label>
-            <input className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none focus:border focus:rounded-md text-gray-400"></input>
+            <input
+              value={username}
+              type={"text"}
+              onChange={handleUNameChange}
+              className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
+            />
           </div>
           <div className="flex flex-col px-2">
             <label className="py-4 text-gray-400">Password</label>
-            <input className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none focus:border focus:rounded-md text-gray-400"></input>
+            <input
+              value={password}
+              type={"text"}
+              onChange={handlePasswordChange}
+              className="px-1 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
+            />
           </div>
         </form>
         <div className="py-3" />
-        <button className="text-gray-400 border border-indigo-500 m-auto px-2 py-1 rounded-md hover:bg-gray-700">
+        <button
+          onClick={handleSubmit}
+          className="text-gray-400 border border-indigo-500 m-auto px-2 py-1 rounded-md hover:bg-gray-700"
+        >
           Login
         </button>
       </div>
