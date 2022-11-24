@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../components/FormInput";
 
 interface LogObj {
   uname: string;
@@ -47,22 +48,20 @@ const Login = () => {
             <label className="block py-4 text-gray-400 font-bold">
               Username
             </label>
-            <input
+            <FormInput
               value={username}
-              type={"text"}
+              type={"string"}
               onChange={handleUNameChange}
-              className="shadow appearance-none w-full py-1 px-3 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
             />
           </div>
           <div className="flex flex-col px-2">
             <label className="block py-4 text-gray-400 font-bold">
               Password
             </label>
-            <input
+            <FormInput
               value={password}
               type={"password"}
               onChange={handlePasswordChange}
-              className="shadow appearance-none w-full py-1 px-3 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
             />
           </div>
         </form>
