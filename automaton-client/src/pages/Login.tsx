@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DarkButton from "../components/forms/DarkButton";
 import FormInput from "../components/forms/FormInput";
 
 interface LogObj {
@@ -65,12 +66,7 @@ const Login = () => {
           </div>
         </form>
         <div className="py-3" />
-        <button
-          onClick={handleSubmit}
-          className="text-gray-400 border border-indigo-500 m-auto px-2 py-1 rounded-md hover:bg-gray-700"
-        >
-          Login
-        </button>
+        <DarkButton text={"Login"} onClick={handleSubmit} />
       </div>
     </div>
   );
