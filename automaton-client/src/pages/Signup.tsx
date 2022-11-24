@@ -11,7 +11,6 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passconf, setPassconf] = useState("");
-  const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
 
   const handleUNameChange = (event: React.FormEvent<HTMLInputElement>) => {

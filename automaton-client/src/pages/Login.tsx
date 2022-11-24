@@ -10,7 +10,6 @@ interface LogObj {
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
   const navigate = useNavigate();
 
   const handleUNameChange = (event: React.FormEvent<HTMLInputElement>) => {
