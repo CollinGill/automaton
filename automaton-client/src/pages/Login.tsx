@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-import Navbar from "../components/layout/Navbar";
+import { useNavigate } from "react-router-dom";
 
 interface LogObj {
   uname: string;
@@ -11,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
 
   const handleUNameChange = (event: React.FormEvent<HTMLInputElement>) => {
     setUsername(event.currentTarget.value);
@@ -34,15 +34,15 @@ const Login = () => {
 
       // TODO: set loginpayload to backend when setup and update return value, redirect to account if success
       console.log(loginPayload);
+      navigate("/projects");
     }
   };
 
   return (
     <div className="flex flex-col">
-      <Navbar />
       <div className="py-3" />
       <div className="flex flex-col m-auto md:w-80 md:h-96 bg-gray-800 rounded-2xl border-solid border-4 border-gray-900 shadow-md">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col px-2">
             <label className="block py-4 text-gray-400 font-bold">
               Username
@@ -60,7 +60,7 @@ const Login = () => {
             </label>
             <input
               value={password}
-              type={"text"}
+              type={"password"}
               onChange={handlePasswordChange}
               className="shadow appearance-none w-full py-1 px-3 bg-gray-800 border-b border-indigo-500 focus:outline-none text-gray-400"
             />
