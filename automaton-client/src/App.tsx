@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
+import Board from "./pages/Board";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -30,8 +31,13 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/Signup/Success",
+    path: "/signup/success",
     element: <SignupSuccess />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/projects/board",
+    element: <Board />,
     errorElement: <NotFoundPage />,
   },
 ]);
