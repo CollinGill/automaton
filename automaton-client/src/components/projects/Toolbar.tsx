@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { DFA } from "../../pages/Board";
 
-const Toolbar = () => {
+interface ToolbarProps {
+  dfas: DFA[];
+}
+
+const Toolbar = ({ dfas }: ToolbarProps) => {
   const [showStateModal, setShowStateModal] = useState(false);
   const [showTransititionModal, setShowTransitionModal] = useState(false);
 

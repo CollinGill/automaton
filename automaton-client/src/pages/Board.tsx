@@ -12,7 +12,7 @@ class Transition {
   }
 }
 
-class State {
+export class State {
   name: string;
   transitions: Transition[];
 
@@ -20,21 +20,64 @@ class State {
     this.name = name;
     this.transitions = transitions === undefined ? [] : transitions;
   }
+
+  addTransition(transitionInput: string, nextState: State): boolean {
+    let newTransition = new Transition(transitionInput, nextState);
+
+    if (this.transitions.includes(newTransition)) return false;
+
+    this.transitions.push(newTransition);
+    return true;
+  }
+
+  removeTransition(transitionInput: string, nextState: State): boolean {
+    let delTransition = new Transition(transitionInput, nextState);
+    const index = this.transitions.indexOf(delTransition);
+
+    if (index > -1) {
+      this.transitions.splice(index, 1);
+      return true;
+    }
+
+    return false;
+  }
 }
 
-class DFA {
+export class DFA {
   name: string;
   alphabet: string;
   states: State[];
   startState?: State;
-  acceptingState?: State;
+  acceptingStates: State[];
 
   constructor(name: string, alphabet: string) {
     this.name = name;
     this.alphabet = alphabet;
     this.states = [];
     this.startState = undefined;
-    this.acceptingState = undefined;
+    this.acceptingStates = [];
+  }
+
+  addState(name: string) {
+    let newState = new State(name);
+    this.states.push(newState);
+  }
+
+  addAcceptingState(stateName: string): boolean {
+    const index = this.states.map((cur) => cur.name).indexOf(stateName);
+
+    // Should in theory never fail
+    if (index > -1) {
+      this.acceptingStates.push(this.states[index]);
+      return true;
+    }
+    return false;
+  }
+
+  set start(newStart: string) {
+    this.startState = this.states.find(
+      (currentState) => currentState.name === newStart
+    );
   }
 }
 
@@ -48,7 +91,7 @@ const Board = () => {
 
   return (
     <div className="flex flex-col">
-      <Toolbar />
+      <Toolbar dfas={DFAs} />
     </div>
   );
 };
