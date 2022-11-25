@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Toolbar from "../components/projects/Toolbar";
 
 // TODO: Refactor into something nicer
 class Transition {
@@ -38,8 +39,18 @@ class DFA {
 }
 
 const Board = () => {
+  // DFAs in this project
   const [DFAs, setDFAs] = useState<DFA[]>([]);
-  return <div></div>;
+
+  // State hooks to modify current DFA
+  const [transition, setTransition] = useState<Transition>();
+  const [state, setState] = useState<State>();
+
+  return (
+    <div className="flex flex-col">
+      <Toolbar />
+    </div>
+  );
 };
 
 export default Board;
