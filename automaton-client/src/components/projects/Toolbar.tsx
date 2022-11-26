@@ -1,13 +1,38 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { DFA } from "../../pages/Board";
+import FormInput from "../forms/FormInput";
+import DropDownStates from "./DropDownStates";
 
 interface ToolbarProps {
-  dfas: DFA[];
+  dfa?: DFA;
 }
 
-const Toolbar = ({ dfas }: ToolbarProps) => {
+const Toolbar = ({ dfa }: ToolbarProps) => {
   const [showStateModal, setShowStateModal] = useState(false);
   const [showTransititionModal, setShowTransitionModal] = useState(false);
+
+  const [stateName, setStateName] = useState("");
+  const [transitionInput, setTransitionInput] = useState("");
+
+  const handleStateNameChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setStateName(event.currentTarget.value);
+  };
+
+  const handleStateSubmit = () => {
+    setStateName("");
+    setShowStateModal(false);
+  };
+
+  const handleTransitionInputChange = (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
+    setTransitionInput(event.currentTarget.value);
+  };
+
+  const handleTransitionSubmit = () => {
+    setTransitionInput("");
+    setShowTransitionModal(false);
+  };
 
   return (
     <div className="flex h-auto w-full bg-slate-800 text-gray-400 px-3 py-1">
@@ -23,28 +48,37 @@ const Toolbar = ({ dfas }: ToolbarProps) => {
                 <h3 className="text-3xl font-semibold">Add State</h3>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                  onClick={() => setShowStateModal(false)}
+                  onClick={() => {
+                    setStateName("");
+                    setShowStateModal(false);
+                  }}
                 >
                   x
                 </button>
               </div>
               {/** Body */}
               <div className="relative p-6 flex-auto">
-                <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                  Body text
-                </p>
+                <label>State Name</label>
+                <FormInput
+                  type={"text"}
+                  onChange={handleStateNameChange}
+                  value={stateName}
+                />
               </div>
               {/** Footer */}
               <div className="flex items-center justify-end p-6 border-t border-solid border-indigo-500 rounded-b">
                 <button
                   className="text-red-500 bg-transparent font-bold uppercase px-6 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  onClick={() => setShowStateModal(false)}
+                  onClick={() => {
+                    setStateName("");
+                    setShowStateModal(false);
+                  }}
                 >
                   Close
                 </button>
                 <button
                   className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-6 py-3 rounded shadow hover:shadow-lg outline-none hover:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  onClick={() => setShowStateModal(false)}
+                  onClick={handleStateSubmit}
                 >
                   Submit
                 </button>
@@ -69,28 +103,51 @@ const Toolbar = ({ dfas }: ToolbarProps) => {
                 <h3 className="text-3xl font-semibold">Add Transition</h3>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                  onClick={() => setShowTransitionModal(false)}
+                  onClick={() => {
+                    setTransitionInput("");
+                    setShowTransitionModal(false);
+                  }}
                 >
                   x
                 </button>
               </div>
               {/** Body */}
-              <div className="relative p-6 flex-auto">
-                <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                  Body text
-                </p>
+              <div className="relative p-6 flex-col">
+                <label>Transition Input</label>
+                <FormInput
+                  type={"text"}
+                  onChange={handleTransitionInputChange}
+                  value={transitionInput}
+                />
+                <div className="flex justify-between">
+                  <DropDownStates
+                    text={"Source states"}
+                    stateNames={
+                      dfa !== undefined ? dfa.states.map((cur) => cur.name) : []
+                    }
+                  />
+                  <DropDownStates
+                    text={"Destination states"}
+                    stateNames={
+                      dfa !== undefined ? dfa.states.map((cur) => cur.name) : []
+                    }
+                  />
+                </div>
               </div>
               {/** Footer */}
               <div className="flex items-center justify-end p-6 border-t border-solid border-indigo-500 rounded-b">
                 <button
                   className="text-red-500 bg-transparent font-bold uppercase px-6 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  onClick={() => setShowTransitionModal(false)}
+                  onClick={() => {
+                    setTransitionInput("");
+                    setShowTransitionModal(false);
+                  }}
                 >
                   Close
                 </button>
                 <button
                   className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-6 py-3 rounded shadow hover:shadow-lg outline-none hover:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  onClick={() => setShowTransitionModal(false)}
+                  onClick={handleTransitionSubmit}
                 >
                   Submit
                 </button>

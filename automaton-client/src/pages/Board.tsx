@@ -84,6 +84,7 @@ export class DFA {
 const Board = () => {
   // DFAs in this project
   const [DFAs, setDFAs] = useState<DFA[]>([]);
+  const [currentDFA, setCurrentDFA] = useState<DFA>();
 
   // State hooks to modify current DFA
   const [transition, setTransition] = useState<Transition>();
@@ -91,7 +92,7 @@ const Board = () => {
 
   return (
     <div className="flex flex-col">
-      <Toolbar dfas={DFAs} />
+      <Toolbar dfa={currentDFA} />
     </div>
   );
 };
