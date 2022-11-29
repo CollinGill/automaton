@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { start } from "repl";
 import { DFA } from "../../pages/Board";
 import FormInput from "../forms/FormInput";
 import DropDownStates from "./DropDownStates";
@@ -12,6 +13,8 @@ const Toolbar = ({ dfa }: ToolbarProps) => {
   const [showTransititionModal, setShowTransitionModal] = useState(false);
 
   const [stateName, setStateName] = useState("");
+  const [startTransition, setStartTransition] = useState("");
+  const [endTransition, setEndTransition] = useState("");
   const [transitionInput, setTransitionInput] = useState("");
 
   const handleStateNameChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -19,6 +22,8 @@ const Toolbar = ({ dfa }: ToolbarProps) => {
   };
 
   const handleStateSubmit = () => {
+    dfa?.addState(stateName);
+    console.log("NEW STATE: %s", stateName)
     setStateName("");
     setShowStateModal(false);
   };
@@ -29,7 +34,11 @@ const Toolbar = ({ dfa }: ToolbarProps) => {
     setTransitionInput(event.currentTarget.value);
   };
 
-  const handleTransitionSubmit = () => {
+  const handleTransitionSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("NEW TRANSITION: %s => %s", startTransition, endTransition);
+    setStartTransition("");
+    setEndTransition("");
     setTransitionInput("");
     setShowTransitionModal(false);
   };
@@ -125,12 +134,14 @@ const Toolbar = ({ dfa }: ToolbarProps) => {
                     stateNames={
                       dfa !== undefined ? dfa.states.map((cur) => cur.name) : []
                     }
+                    setChosenState={setStartTransition}
                   />
                   <DropDownStates
                     text={"Destination states"}
                     stateNames={
                       dfa !== undefined ? dfa.states.map((cur) => cur.name) : []
                     }
+                    setChosenState={setEndTransition}
                   />
                 </div>
               </div>
